@@ -1,0 +1,24 @@
+{% extends "grader/base.html" %}
+{% load staticfiles%}
+{% block css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
+{% endblock %}
+
+{%  block body %}
+<section class="main">
+    {% if valve_status == "unavailable" %}
+    <div class="alert alert-danger" role="alert"><strong>ERROR:</strong> Cannot communicate with robosquirt server...</div>
+    {% endif %}
+    <h1 class="logotype">Grading</h1>
+
+    <div class="stripe">
+        <ul class="tools">
+
+        </ul>
+    </div>
+</section>
+
+{%  endblock %}
