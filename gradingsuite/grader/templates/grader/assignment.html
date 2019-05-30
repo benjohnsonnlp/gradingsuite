@@ -1,0 +1,26 @@
+{% extends "grader/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ assignment.name }} grading
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+
+{% endblock %}
+
+{% block body %}
+    <section class="main">
+        <h1 class="logotype">{{ assignment.name }} grading</h1>
+
+        <div class="stripe">
+            <ul class="tools">
+
+            </ul>
+        </div>
+    </section>
+
+{% endblock %}
