@@ -16,11 +16,13 @@
     <section class="main">
         <h1 class="logotype">{{ assignment.name }} grading</h1>
 
-        <div class="stripe">
-            <ul class="tools">
-
-            </ul>
-        </div>
+            <ul>
+            {% for submission in submissions %}
+                <li>
+                    {{ submission }}
+                </li>
+            {% endfor %}
+        </ul>
     </section>
 
 {% endblock %}
