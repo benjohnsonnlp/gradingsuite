@@ -18,7 +18,9 @@ Grading Home
 
     <div class="stripe">
         <ul class="tools">
-
+            {% for assignment in assignments %}
+                {{ assignment.name }}
+            {% endfor %}
         </ul>
     </div>
 </section>
