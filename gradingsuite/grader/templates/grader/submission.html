@@ -27,7 +27,7 @@
         <h4>Project files</h4>
         <ul>
             {% for file in submission.project_files %}
-                <li>
+                <li file="{{ file }}" class="filelink" assignment="{{ assignment.id }}">
                     {{ file }}
                 </li>
             {% endfor %}
@@ -41,11 +41,15 @@
 
     </section>
 
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
     <script src="{% static '/ace-builds/src-noconflict/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static '/js/submission.js' %}" type="text/javascript" charset="utf-8"></script>
     <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/python");
     </script>
-
 {% endblock %}

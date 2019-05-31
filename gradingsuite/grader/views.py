@@ -1,9 +1,10 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.template import loader
 
 from grader.models import Assignment
 from grader.submissions import get_submissions, Submission
+from grader.templatetags.grader_extras import get_contents
 
 
 def index(request):
@@ -34,3 +35,12 @@ def submission(request, assignment_id):
         "submission": submission,
     }
     return HttpResponse(template.render(context, request))
+
+
+def get_file_contents(request, assignment_id):
+    file = request.POST.get("filename", "")
+    with open(file, 'r') as f:
+        contents = f.read()
+    # assignment = get_object_or_404(Assignment, pk=assignment_id)
+    # submission = Submission(request.GET.get("path"), assignment)
+    return HttpResponse(contents)
