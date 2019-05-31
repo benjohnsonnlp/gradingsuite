@@ -1,0 +1,51 @@
+{% extends "grader/base.html" %}
+{% load staticfiles %}
+{% load grader_extras %}
+
+{% block title %}
+    {{ assignment.name }} grading
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+
+{% endblock %}
+
+{% block body %}
+    <style type="text/css" media="screen">
+        #editor {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    <section class="main">
+        <h1 class="logotype">{{ assignment.name }} grading</h1>
+        <h4>Project files</h4>
+        <ul>
+            {% for file in submission.project_files %}
+                <li>
+                    {{ file }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div>
+            <div id="editor" style="height: 500px; width: 1000px">
+{{ submission|get_contents:0 }}
+            </div>
+        </div>
+
+    </section>
+
+    <script src="{% static '/ace-builds/src-noconflict/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/python");
+    </script>
+
+{% endblock %}

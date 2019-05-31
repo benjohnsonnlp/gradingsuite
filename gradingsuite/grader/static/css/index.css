@@ -11,6 +11,8 @@ h1.logotype {
 .main {
   background-color: #00A1FF;
   padding-bottom: 70px;
+  max-width: 1000px;
+  margin: auto;
 }
     .status {
         text-align: center;

@@ -19,7 +19,7 @@
             <ul>
             {% for submission in submissions %}
                 <li>
-                    {{ submission }}
+                    <a href="submission/?path={{ submission }}"> {{ submission }}</a>
                 </li>
             {% endfor %}
         </ul>
