@@ -1,10 +1,9 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import loader
 
-from grader.models import Assignment
+from grader.models import Assignment, Rubric, RubricSection, RubricItem
 from grader.submissions import get_submissions, Submission
-from grader.templatetags.grader_extras import get_contents
 
 
 def index(request):
@@ -26,13 +25,25 @@ def assignment(request, assignment_id):
     return HttpResponse(template.render(context, request))
 
 
+def get_sections(rubric):
+    output = {}
+    for section in RubricSection.objects.filter(rubric=rubric.id):
+        items = [item.text for item in RubricItem.objects.filter(section=section.id)]
+        output[section.name] = items
+    return output
+
+
 def submission(request, assignment_id):
     template = loader.get_template("grader/submission.html")
     assignment = get_object_or_404(Assignment, pk=assignment_id)
     submission = Submission(request.GET.get("path"), assignment)
+    rubric = get_object_or_404(Rubric, assignment=assignment_id)
+    sections = get_sections(rubric)
     context = {
         "assignment": assignment,
         "submission": submission,
+        "rubric": rubric,
+        "sections": sections,
     }
     return HttpResponse(template.render(context, request))
 
