@@ -1,2 +1,2 @@
-release: python manage.py migrate
+release: python gradingsuite/manage.py migrate
 web: gunicorn gradingsuite.wsgi --log-file -
