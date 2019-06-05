@@ -17,19 +17,21 @@ function getCookie(name) {
 
 var csrftoken = getCookie('csrftoken');
 
-$(document).ready(function() {
-   $('.filelink').click(function () {
-      assignment_id = $(this).attr("assignment");
-      file = $(this).attr("file");
-      $.post("file_contents", {
-         csrfmiddlewaretoken: csrftoken,
-         filename: file,
-      }, function(result) {
-         //$('#editor').text(result);
-         var editor = ace.edit("editor");
-         editor.setTheme("ace/theme/monokai");
-         editor.session.setMode("ace/mode/python");
-         editor.setValue(result);
-      });
-   })
+$(document).ready(function () {
+    $('.filelink').click(function () {
+        assignment_id = $(this).attr("assignment");
+        file = $(this).attr("file");
+        submission = $(this).attr("submission");
+        $.post("file_contents", {
+            csrfmiddlewaretoken: csrftoken,
+            filename: file,
+            submission: submission,
+        }, function (result) {
+            //$('#editor').text(result);
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/python");
+            editor.setValue(result);
+        });
+    })
 });

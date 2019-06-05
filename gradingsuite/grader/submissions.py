@@ -19,15 +19,15 @@ class Submission:
     def project_files(self):
         if self.files:
             return self.files  # cache so we don't hit the HD more than necessary
-
-        for subdir in os.listdir(self.filename):
-            full_subdir = os.path.join(self.filename, subdir)
+        full_path = os.path.join(self.assignment.home_dir, self.filename)
+        for subdir in os.listdir(full_path):
+            full_subdir = os.path.join(full_path, subdir)
 
             # if it's a file with one of the endings for the language of the assignment
             if not os.path.isdir(full_subdir):
                 for ending in file_endings(self.assignment.language):
                     if full_subdir.endswith(ending):
-                        self.files.append(full_subdir)
+                        self.files.append(subdir)
 
         return self.files
 
@@ -40,6 +40,6 @@ def get_submissions(filename, assignment):
     for subdir in os.listdir(filename):
         full_subdir = os.path.join(filename, subdir)
         if os.path.isdir(full_subdir):
-            submissions.append(Submission(full_subdir, assignment))
+            submissions.append(Submission(subdir, assignment))
 
     return submissions

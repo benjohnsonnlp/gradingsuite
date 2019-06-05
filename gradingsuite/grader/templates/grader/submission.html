@@ -27,14 +27,14 @@
         <h4>Project files</h4>
         <ul>
             {% for file in submission.project_files %}
-                <li file="{{ file }}" class="filelink" assignment="{{ assignment.id }}">
+                <li file="{{ file }}" class="filelink" assignment="{{ assignment.id }}" submission="{{ submission.filename }}">
                     {{ file }}
                 </li>
             {% endfor %}
         </ul>
 
         <div>
-            <div id="editor" style="height: 500px; width: 1000px"> {{ submission|get_contents:0 }}</div>
+            <div id="editor" style="height: 500px; width: 1000px"> {{ submission_contents }}</div>
         </div>
 
         <div>

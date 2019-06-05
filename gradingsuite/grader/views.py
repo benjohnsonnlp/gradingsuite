@@ -1,4 +1,5 @@
 import json
+import os
 
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -20,6 +21,8 @@ def assignment(request, assignment_id):
     template = loader.get_template("grader/assignment.html")
     assignment = get_object_or_404(Assignment, pk=assignment_id)
     submissions = get_submissions(assignment.home_dir, assignment)
+    for sub in submissions:
+        print("sub file", sub.filename)
     context = {
         "assignment": assignment,
         "submissions": submissions,
@@ -42,10 +45,14 @@ def submission(request, assignment_id):
     with open(assignment.rubric_filename, 'r') as f:
         rubric = json.load(f)
     # sections = get_sections(rubric)
+    if submission.project_files():
+        with open(os.path.join(assignment.home_dir, submission.project_files()[0]), 'r') as f:
+            submission_contents = f.read()
     context = {
         "assignment": assignment,
         "submission": submission,
         "rubric": rubric,
+        "submission_contents": submission_contents,
         # "sections": sections,
     }
     return HttpResponse(template.render(context, request))
@@ -53,7 +60,11 @@ def submission(request, assignment_id):
 
 def get_file_contents(request, assignment_id):
     file = request.POST.get("filename", "")
-    with open(file, 'r') as f:
+    submission = request.POST.get("submission", "")
+    assignment = get_object_or_404(Assignment, pk=assignment_id)
+    full_path = os.path.join(assignment.home_dir, submission, file)
+    # print(assignment.home_dir, submission, file)
+    with open(full_path, 'r') as f:
         contents = f.read()
     # assignment = get_object_or_404(Assignment, pk=assignment_id)
     # submission = Submission(request.GET.get("path"), assignment)
