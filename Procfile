@@ -1,2 +1,2 @@
 release: python gradingsuite/manage.py migrate
-web: gunicorn gradingsuite.wsgi --log-file -
+web: python gradingsuite/manage.py runserver 0.0.0.0:$PORT
