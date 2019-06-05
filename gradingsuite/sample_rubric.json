@@ -1,0 +1,48 @@
+[
+  {
+    "name": "User input",
+    "items": [
+      {
+        "text": "User input correctly elicited",
+        "value": 2,
+        "optional": "true"
+      },
+      {
+        "text": "User input validated",
+        "value": 2,
+        "optional": "true"
+      }
+    ]
+  },
+  {
+    "name": "Use of recursion",
+    "items": [
+      {
+        "text": "Correct recursive case",
+        "value": 2,
+        "optional": "true"
+      },
+      {
+        "text": "Correct base case",
+        "value": 2,
+        "optional": "true"
+      },
+      {
+        "text": "Infinite recursion",
+        "value": 0,
+        "optional": "true"
+      }
+    ]
+  },
+
+  {
+    "name": "Effort Grading",
+    "items": [
+      {
+        "text": "Some effort was made",
+        "value": 20,
+        "optional": "true"
+      }
+    ]
+  }
+]

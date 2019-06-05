@@ -35,14 +35,24 @@
 
         <div>
             <div id="editor" style="height: 500px; width: 1000px">
-{{ submission|get_contents:0 }}
+                {{ submission|get_contents:0 }}
             </div>
         </div>
 
         <div>
             <h4>Grading</h4>
-            {{ rubric.student_id }}
-            {{ sections }}
+            {% for section in rubric %}
+                <form>
+                    <h5>{{ section.name }}</h5>
+                    <ul section="{{ section.name }}">
+                        {% for item in section.items %}
+                            <li>
+                                <input class="grade-input" type="text" name="{{ item.value }}" value="0"/>
+                                /{{ item.value }}: {{ item.text }}</li>
+                        {% endfor %}
+                    </ul>
+                </form>
+            {% endfor %}
         </div>
 
     </section>

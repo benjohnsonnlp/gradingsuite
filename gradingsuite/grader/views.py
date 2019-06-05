@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import loader
@@ -37,13 +39,14 @@ def submission(request, assignment_id):
     template = loader.get_template("grader/submission.html")
     assignment = get_object_or_404(Assignment, pk=assignment_id)
     submission = Submission(request.GET.get("path"), assignment)
-    rubric = get_object_or_404(Rubric, assignment=assignment_id)
-    sections = get_sections(rubric)
+    with open(assignment.rubric_filename, 'r') as f:
+        rubric = json.load(f)
+    # sections = get_sections(rubric)
     context = {
         "assignment": assignment,
         "submission": submission,
         "rubric": rubric,
-        "sections": sections,
+        # "sections": sections,
     }
     return HttpResponse(template.render(context, request))
 

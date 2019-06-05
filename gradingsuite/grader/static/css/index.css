@@ -121,6 +121,10 @@ h4 {
     margin-left:5px;
 }
 
+.grade-input {
+    max-width:20px;
+}
+
 .turn-on > button {
     -moz-border-radius: 28px;
     -webkit-border-radius: 28px;
