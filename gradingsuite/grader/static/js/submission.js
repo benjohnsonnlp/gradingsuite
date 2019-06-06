@@ -24,6 +24,7 @@ $(document).ready(function () {
         submission = $(this).attr("submission");
         $.post("file_contents", {
             csrfmiddlewaretoken: csrftoken,
+            csrf_token: csrftoken,
             filename: file,
             submission: submission,
         }, function (result) {

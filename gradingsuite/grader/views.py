@@ -4,11 +4,13 @@ import os
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import loader
+from django.views.decorators.csrf import ensure_csrf_cookie
 
-from grader.models import Assignment, Rubric, RubricSection, RubricItem
+from grader.models import Assignment, RubricSection, RubricItem
 from grader.submissions import get_submissions, Submission
 
 
+@ensure_csrf_cookie
 def index(request):
     template = loader.get_template("grader/index.html")
     context = {
@@ -17,6 +19,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
+@ensure_csrf_cookie
 def assignment(request, assignment_id):
     template = loader.get_template("grader/assignment.html")
     assignment = get_object_or_404(Assignment, pk=assignment_id)
@@ -38,6 +41,7 @@ def get_sections(rubric):
     return output
 
 
+@ensure_csrf_cookie
 def submission(request, assignment_id):
     template = loader.get_template("grader/submission.html")
     assignment = get_object_or_404(Assignment, pk=assignment_id)
@@ -58,6 +62,7 @@ def submission(request, assignment_id):
     return HttpResponse(template.render(context, request))
 
 
+@ensure_csrf_cookie
 def get_file_contents(request, assignment_id):
     file = request.POST.get("filename", "")
     submission = request.POST.get("submission", "")
