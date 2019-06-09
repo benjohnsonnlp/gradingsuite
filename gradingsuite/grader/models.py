@@ -7,9 +7,10 @@ class Assignment(models.Model):
     language = models.CharField(max_length=200, default="python")
     rubric_filename = models.CharField(max_length=1000, default='sample_rubric.json')
 
+
 class Rubric(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    student_id = models.CharField(max_length=200, default="")
+    is_blank = models.BooleanField(default=True)
 
 
 class RubricSection(models.Model):
@@ -22,3 +23,16 @@ class RubricItem(models.Model):
     text = models.CharField(max_length=1000, default="")
     possible_points = models.IntegerField()
     earned_points = models.IntegerField()
+    optional = models.BooleanField()
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    institution_id = models.CharField(max_length=200)
+
+
+class Submission(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    filename = models.CharField(max_length=1000)
+    rubric = models.ForeignKey(Rubric, on_delete=models.SET_NULL, null=True)
