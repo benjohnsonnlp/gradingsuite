@@ -34,5 +34,21 @@ $(document).ready(function () {
             editor.session.setMode("ace/mode/python");
             editor.setValue(result);
         });
-    })
+    });
+
+    $('#additive').click(function () {
+        if (confirm("Changing grading mode will modify all current grades.  Continue?")) {
+            $('.grade-input').each(function () {
+                $(this).attr("value", 0);
+            });
+        }
+    });
+
+    $('#subtractive').click(function () {
+        if (confirm("Changing grading mode will modify all current grades.  Continue?")) {
+            $('.grade-input').each(function () {
+                $(this).attr("value", $(this).attr('max-value'));
+            });
+        }
+    });
 });

@@ -53,6 +53,14 @@
 
     <div class="container-fluid">
         <h4>Grading</h4>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active" id="additive">
+                <input type="radio" name="options" autocomplete="off" checked> Additive
+            </label>
+            <label class="btn btn-secondary" id="subtractive">
+                <input type="radio" name="options" autocomplete="off"> Subtractive
+            </label>
+        </div>
         <form>
             <div class="card-group">
                 {% for section in rubric %}
@@ -63,7 +71,7 @@
                         <ul section="{{ section.name }}" class="card-text">
                             {% for item in section.items %}
                             <li>
-                                <input class="grade-input" type="text" name="{{ item.value }}" value="0"/>
+                                <input class="grade-input" type="text" max-value="{{ item.value }}" value="{{item.value}}"/>
                                 /{{ item.value }}: {{ item.text }}
                             </li>
                             {% endfor %}
