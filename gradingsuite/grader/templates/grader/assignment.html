@@ -15,14 +15,13 @@
 {% block body %}
     <section class="main">
         <h1 class="logotype">{{ assignment.name }} grading</h1>
-
-            <ul>
-            {% for submission in submissions %}
-                <li>
-                    <a href="submission/{{ submission.id }}"> {{ submission.filename }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+            <div class="container-fluid stripe">
+            <div class="list-group centered-list">
+                {% for submission in submissions %}
+                    <a class="list-group-item list-group-item-action" href="submission/{{ submission.id }}"> {{ submission.filename }}</a>
+                {% endfor %}
+            </div>
+        </div>
     </section>
 
 {% endblock %}
