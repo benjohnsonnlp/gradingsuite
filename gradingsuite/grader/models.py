@@ -22,7 +22,6 @@ class RubricItem(models.Model):
     section = models.ForeignKey(RubricSection, on_delete=models.CASCADE)
     text = models.CharField(max_length=1000, default="")
     possible_points = models.IntegerField()
-    earned_points = models.IntegerField()
     optional = models.BooleanField()
 
 
@@ -36,3 +35,8 @@ class Submission(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     filename = models.CharField(max_length=1000)
     rubric = models.ForeignKey(Rubric, on_delete=models.SET_NULL, null=True)
+
+class GradedItem(models.Model):
+    submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
+    rubric_item = models.ForeignKey(RubricItem, null=True, on_delete=models.SET_NULL)
+    earned_points = models.IntegerField()
