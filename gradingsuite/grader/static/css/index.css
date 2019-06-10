@@ -23,8 +23,6 @@ h1.logotype {
 
 .stripe {
     background-color: rgba(255, 255, 255, 0.5);
-    height: 170px;
-    width: 100%;
 }
 
 .tools {
@@ -92,4 +90,9 @@ h4 {
 
 .list-group-item {
     background-color: rgba(255, 155, 232, 0.66);
+}
+
+.centered-list {
+    margin: auto;
+    width: 18rem;
 }

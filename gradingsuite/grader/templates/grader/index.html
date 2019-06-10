@@ -1,30 +1,30 @@
 {% extends "grader/base.html" %}
-{% load staticfiles%}
+{% load staticfiles %}
 
 {% block title %}
-Grading Home
+    Grading Home
 {% endblock %}
 
 {% block css %}
     {{ block.super }}
 
-    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 
 {% endblock %}
 
 {% block body %}
-<section class="main">
+    <section class="main">
         <h1 class="logotype">Grading</h1>
 
-    <div class="stripe">
-        <ul class="tools">
-            {% for assignment in assignments %}
-                <li>
-                    <a href="assignments/{{assignment.id}}">{{ assignment.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</section>
+        <div class="container-fluid stripe">
+            <div class="list-group centered-list">
+                {% for assignment in assignments %}
+                    <a class="list-group-item list-group-item-action" href="assignments/{{ assignment.id }}">
+                        {{ assignment.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
