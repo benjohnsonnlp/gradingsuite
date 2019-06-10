@@ -52,6 +52,8 @@ def submission(request, assignment_id):
     if submission.project_files():
         with open(os.path.join(assignment.home_dir, submission.filename, submission.project_files()[0]), 'r') as f:
             submission_contents = f.read()
+    else:
+            submission_contents = []
     context = {
         "assignment": assignment,
         "submission": submission,
