@@ -19,7 +19,7 @@
             <ul>
             {% for submission in submissions %}
                 <li>
-                    <a href="submission/?path={{ submission }}"> {{ submission }}</a>
+                    <a href="submission/{{ submission.id }}"> {{ submission.filename }}</a>
                 </li>
             {% endfor %}
         </ul>

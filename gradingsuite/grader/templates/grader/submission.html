@@ -63,16 +63,16 @@
         </div>
         <form>
             <div class="card-group">
-                {% for section in rubric %}
+                {% for section in rubric.rubricsection_set.all %}
 
                 <div class="cardo card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ section.name }}</h5>
                         <ul section="{{ section.name }}" class="card-text">
-                            {% for item in section.items %}
+                            {% for item in section.rubricitem_set.all %}
                             <li>
-                                <input class="grade-input" type="text" max-value="{{ item.value }}" value="{{item.value}}"/>
-                                /{{ item.value }}: {{ item.text }}
+                                <input class="grade-input" type="text" max-value="{{ item.possible_points }}" value="{{item.possible_points}}"/>
+                                /{{ item.possible_points }}: {{ item.text }}
                             </li>
                             {% endfor %}
                         </ul>
